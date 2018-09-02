@@ -3,29 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-namespace CCG
+namespace CCG.SnowballFight
 {
-    public class SnowballPitcher : MonoBehaviour
+    public class SnowballPitcher : MonoBehaviour, IPitcher
     {
         #region properties
         public Enum.DirectionY DirectionY { get; private set; }
         #endregion
 
         #region public methods
+        public void OnFixedUpdate(float deltaTime)
+        {
+        }
+
         public void Setup(Enum.DirectionY directionY)
         {
             DirectionY = directionY;
         }
-        #endregion
 
-        #region private methods
         /// <summary>
         /// 雪玉を投げる
         /// </summary>
-        private void Throw(Snowball snowball)
+        public void Throw(Snowball snowball)
         {
             snowball.Setup(DirectionY);
         }
+        #endregion
+
+        #region private methods
         #endregion
     }
 }
