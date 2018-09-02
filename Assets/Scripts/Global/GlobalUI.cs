@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.Assertions;
 
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 namespace CCG
 {
@@ -27,6 +26,8 @@ namespace CCG
         {
             SetActive(false);
             m_backToTitleButton.onClick.AddListener(OnClickBackToTitle);
+
+            SetActive(true);
         }
 
         public void SetActive(bool isActive)
@@ -38,6 +39,7 @@ namespace CCG
         #region private methods
         private void OnClickBackToTitle()
         {
+            Global.LoadSceneAddtive("Title");
         }
         #endregion
     }

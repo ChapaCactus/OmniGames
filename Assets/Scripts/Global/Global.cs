@@ -21,6 +21,11 @@ namespace CCG
 
             IsInitialized = true;
         }
+
+        public static void LoadSceneAddtive(string sceneName)
+        {
+            SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
+        }
         #endregion
     }
 }
