@@ -17,5 +17,21 @@ namespace CCG
             DirectionY = directionY;
         }
         #endregion
+
+        #region private methods
+        /// <summary>
+        /// 雪玉を投げる
+        /// </summary>
+        private void Throw()
+        {
+            switch(DirectionY)
+            {
+                case Enum.DirectionY.Up:
+                    break;
+                case Enum.DirectionY.Down:
+                    break;
+            }
+        }
+        #endregion
     }
 }
