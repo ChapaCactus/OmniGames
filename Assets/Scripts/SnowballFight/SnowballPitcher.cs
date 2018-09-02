@@ -22,15 +22,9 @@ namespace CCG
         /// <summary>
         /// 雪玉を投げる
         /// </summary>
-        private void Throw()
+        private void Throw(Snowball snowball)
         {
-            switch(DirectionY)
-            {
-                case Enum.DirectionY.Up:
-                    break;
-                case Enum.DirectionY.Down:
-                    break;
-            }
+            snowball.Setup(DirectionY);
         }
         #endregion
     }
