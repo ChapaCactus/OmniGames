@@ -15,5 +15,17 @@ namespace CCG
             return entity;
         }
         #endregion
+
+        #region public methods
+        public void Init()
+        {
+            SetActive(false);
+        }
+
+        public void SetActive(bool isActive)
+        {
+            gameObject.SetActive(isActive);
+        }
+        #endregion
     }
 }

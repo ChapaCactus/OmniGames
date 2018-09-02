@@ -17,6 +17,7 @@ namespace CCG
         public static void Init()
         {
             GlobalUI = GlobalUI.Create();
+            GlobalUI.Init();
 
             IsInitialized = true;
         }
