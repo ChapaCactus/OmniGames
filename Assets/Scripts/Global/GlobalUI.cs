@@ -4,10 +4,11 @@ using UnityEngine;
 using UnityEngine.Assertions;
 
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 namespace CCG
 {
-    public class GlobalUI : MonoBehaviour
+    public class GlobalUI : SingletonMonoBehaviour<GlobalUI>
     {
         #region variables
         [SerializeField]
@@ -17,21 +18,15 @@ namespace CCG
         #region unity callbacks
         private void Awake()
         {
-            m_backToTitleButton.onClick.AddListener(OnClickBackToTitle);
+            Init();
         }
         #endregion
 
         #region public methods
-        public static GlobalUI Create()
-        {
-            var prefab = Resources.Load("") as GlobalUI;
-            var entity = Instantiate(prefab, null);
-            return entity;
-        }
-
         public void Init()
         {
             SetActive(false);
+            m_backToTitleButton.onClick.AddListener(OnClickBackToTitle);
         }
 
         public void SetActive(bool isActive)
