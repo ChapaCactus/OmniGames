@@ -327,6 +327,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 982512e88ca024518b04b31c071ef5d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_backToTitleButton: {fileID: 1537039592}
 --- !u!4 &731391369
 Transform:
   m_ObjectHideFlags: 0
@@ -492,7 +493,7 @@ GameObject:
   - component: {fileID: 1537039593}
   - component: {fileID: 1537039592}
   m_Layer: 5
-  m_Name: Button
+  m_Name: BackToTitle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
