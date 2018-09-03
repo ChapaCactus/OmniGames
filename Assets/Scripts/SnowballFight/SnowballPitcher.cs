@@ -15,11 +15,30 @@ namespace CCG.SnowballFight
         #region properties
         public Enum.DirectionY DirectionY { get; private set; }
         public Enum.Side Side { get { return m_side; } }
+
+        private float ThrowTimer { get; set; } = 0;
+        private float ThrowDelay { get; set; } = 99999;
+        #endregion
+
+        #region unity callbacks
+        private void Awake()
+        {
+            Setup(m_side, 3);
+        }
+
+        private void FixedUpdate()
+        {
+            OnFixedUpdate(Time.deltaTime);
+        }
         #endregion
 
         #region public methods
-        public void Setup(Enum.Side side)
+        public void Setup(Enum.Side side, float throwDelay)
         {
+            // 雪玉投げタイマー設定
+            ThrowDelay = throwDelay;
+            ResetThrowTimer();
+            // サイドを見て設定仕分け
             m_side = side;
             switch (side)
             {
@@ -44,6 +63,12 @@ namespace CCG.SnowballFight
 
         public void OnFixedUpdate(float deltaTime)
         {
+            ThrowTimer -= deltaTime;
+            if(ThrowTimer <= 0)
+            {
+                ResetThrowTimer();
+                Throw();
+            }
         }
 
         public Enum.Side GetSide() => Side;
@@ -62,7 +87,7 @@ namespace CCG.SnowballFight
         [ContextMenu("Throw")]
         public void TestThrow()
         {
-            Setup(m_side);
+            Setup(m_side, 10);
             Throw();
         }
         #endregion
@@ -71,6 +96,12 @@ namespace CCG.SnowballFight
         private void Dead()
         {
             SetActive(false);
+        }
+
+        private void ResetThrowTimer()
+        {
+            var randomDelayAdd = UnityEngine.Random.Range(0, 1f);
+            ThrowTimer = ThrowDelay + randomDelayAdd;
         }
         #endregion
     }
