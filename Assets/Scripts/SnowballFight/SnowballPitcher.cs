@@ -32,6 +32,15 @@ namespace CCG.SnowballFight
             }
         }
 
+        public void SetActive(bool isActive)
+        {
+            gameObject.SetActive(isActive);
+        }
+
+        public void Damage(int damage)
+        {
+        }
+
         public void OnFixedUpdate(float deltaTime)
         {
         }
@@ -58,6 +67,10 @@ namespace CCG.SnowballFight
         #endregion
 
         #region private methods
+        private void Dead()
+        {
+            SetActive(false);
+        }
         #endregion
     }
 }

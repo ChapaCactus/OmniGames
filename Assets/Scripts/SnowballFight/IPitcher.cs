@@ -9,6 +9,8 @@ namespace CCG.SnowballFight
     {
         #region public methods
         void Throw();
+        void Damage(int damage);
+
         void OnFixedUpdate(float deltaTime);
 
         Enum.Side GetSide();
