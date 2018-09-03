@@ -21,11 +21,6 @@ namespace CCG.SnowballFight
         #endregion
 
         #region unity callbacks
-        private void Awake()
-        {
-            Setup(m_side, 3);
-        }
-
         private void FixedUpdate()
         {
             OnFixedUpdate(Time.deltaTime);
@@ -56,6 +51,11 @@ namespace CCG.SnowballFight
             gameObject.SetActive(isActive);
         }
 
+        public void SetPosition(Vector2 pos)
+        {
+            transform.position = pos;
+        }
+
         public void Damage(int damage)
         {
             Dead();
@@ -82,13 +82,6 @@ namespace CCG.SnowballFight
             snowball.Setup(DirectionY, Side);
             snowball.SetPosition(transform.position);
             snowball.Throw();
-        }
-
-        [ContextMenu("Throw")]
-        public void TestThrow()
-        {
-            Setup(m_side, 10);
-            Throw();
         }
         #endregion
 
