@@ -8,8 +8,10 @@ namespace CCG.SnowballFight
     public interface IPitcher
     {
         #region public methods
-        void Throw(Snowball snowball);
+        void Throw();
         void OnFixedUpdate(float deltaTime);
+
+        Enum.Side GetSide();
         #endregion
     }
 }

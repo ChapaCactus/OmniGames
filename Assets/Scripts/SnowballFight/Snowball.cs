@@ -16,6 +16,8 @@ namespace CCG.SnowballFight
         public Vector3 MoveVector { get; private set; } = Vector3.zero;
         public float Speed { get; private set; }
 
+        public Enum.Side OwnerSide { get; private set; }
+
         public bool IsPlaying { get; private set; } = false;
         #endregion
 
@@ -30,8 +32,16 @@ namespace CCG.SnowballFight
         #endregion
 
         #region public methods
-        public void Setup(Enum.DirectionY dirY, float speed = 1)
+        public static Snowball Create()
         {
+            var prefab = Resources.Load<Snowball>("Snowball/Prefabs/Item/Snowball");
+            return Instantiate(prefab, null);
+        }
+
+        public void Setup(Enum.DirectionY dirY, Enum.Side ownerSide, float speed = 1)
+        {
+            OwnerSide = ownerSide;
+
             DirectionY = dirY;
             Speed = speed;
             switch(dirY)
@@ -50,6 +60,11 @@ namespace CCG.SnowballFight
             gameObject.SetActive(isActive);
         }
 
+        public void SetPosition(Vector2 position)
+        {
+            transform.position = position;
+        }
+
         public void Throw()
         {
             IsPlaying = true;
@@ -59,16 +74,30 @@ namespace CCG.SnowballFight
         [ContextMenu("TestThrow")]
         public void TestThrow()
         {
-            Setup(Enum.DirectionY.Up, 1);
+            Setup(Enum.DirectionY.Up, Enum.Side.Player1, 1);
             Throw();
         }
         #endregion
 
         #region private methods
-        private void OnCollisionEnter2D(Collision2D collision)
+        private void OnTriggerEnter2D(Collider2D collision)
         {
-            if(collision.gameObject.CompareTag("Worker"))
+            if (collision.CompareTag("Worker"))
             {
+                var pitcher = collision.gameObject.GetComponent<IPitcher>();
+                if (OwnerSide != pitcher.GetSide())
+                {
+                    // 敵と衝突
+                    Kill();
+                }
+            }
+        }
+
+        private void OnTriggerExit2D(Collider2D collision)
+        {
+            if(collision.CompareTag("Area"))
+            {
+                // 戦場から出た場合、消す
                 Kill();
             }
         }

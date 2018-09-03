@@ -11,5 +11,11 @@ namespace CCG.Enum
         Up,
         Down,
     }
+
+    public enum Side
+    {
+        Player1,// 味方想定
+        Player2,// 敵想定
+    }
     #endregion
 }

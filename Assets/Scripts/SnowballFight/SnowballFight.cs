@@ -10,22 +10,22 @@ namespace CCG.SnowballFight
     public class SnowballFight : MonoBehaviour
     {
         #region properties
-        public List<IPitcher> PlayerPitchers { get; private set; }
-        public List<IPitcher> EnemyPitchers { get; private set; }
+        public List<IPitcher> Player1Pitchers { get; private set; }
+        public List<IPitcher> Player2Pitchers { get; private set; }
         #endregion
 
         #region unity callbacks
         private void Awake()
         {
-            PlayerPitchers = new List<IPitcher>();
-            EnemyPitchers = new List<IPitcher>();
+            Player1Pitchers = new List<IPitcher>();
+            Player2Pitchers = new List<IPitcher>();
         }
 
         private void FixedUpdate()
         {
             float deltaTime = Time.deltaTime;
-            PlayerPitchers.ForEach(pitcher => pitcher.OnFixedUpdate(deltaTime));
-            EnemyPitchers.ForEach(pitcher => pitcher.OnFixedUpdate(deltaTime));
+            Player1Pitchers.ForEach(pitcher => pitcher.OnFixedUpdate(deltaTime));
+            Player2Pitchers.ForEach(pitcher => pitcher.OnFixedUpdate(deltaTime));
         }
         #endregion
     }
