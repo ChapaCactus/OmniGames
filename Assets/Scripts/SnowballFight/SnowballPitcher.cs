@@ -39,6 +39,7 @@ namespace CCG.SnowballFight
 
         public void Damage(int damage)
         {
+            Dead();
         }
 
         public void OnFixedUpdate(float deltaTime)
