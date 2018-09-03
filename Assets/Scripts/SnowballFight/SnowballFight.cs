@@ -15,6 +15,12 @@ namespace CCG.SnowballFight
         #endregion
 
         #region unity callbacks
+        private void Awake()
+        {
+            PlayerPitchers = new List<IPitcher>();
+            EnemyPitchers = new List<IPitcher>();
+        }
+
         private void FixedUpdate()
         {
             float deltaTime = Time.deltaTime;
