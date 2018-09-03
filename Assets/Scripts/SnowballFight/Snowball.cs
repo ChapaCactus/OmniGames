@@ -87,6 +87,7 @@ namespace CCG.SnowballFight
                 var pitcher = collision.gameObject.GetComponent<IPitcher>();
                 if (OwnerSide != pitcher.GetSide())
                 {
+                    pitcher.Damage(1);
                     // 敵と衝突
                     Kill();
                 }
