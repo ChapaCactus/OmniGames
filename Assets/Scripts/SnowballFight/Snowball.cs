@@ -44,7 +44,7 @@ namespace CCG.SnowballFight
 
             DirectionY = dirY;
             Speed = speed;
-            switch(dirY)
+            switch (dirY)
             {
                 case Enum.DirectionY.Up:
                     MoveVector = Vector3.up;
@@ -82,21 +82,29 @@ namespace CCG.SnowballFight
         #region private methods
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.CompareTag("Worker"))
+            var tag = collision.tag;
+            switch (tag)
             {
-                var pitcher = collision.gameObject.GetComponent<IPitcher>();
-                if (OwnerSide != pitcher.GetSide())
-                {
-                    pitcher.Damage(1);
-                    // 敵と衝突
-                    Kill();
-                }
+                case "Worker":
+                    var pitcher = collision.gameObject.GetComponent<IPitcher>();
+                    if (OwnerSide != pitcher.GetSide())
+                    {
+                        pitcher.Damage(1);
+                        // 敵と衝突
+                        Kill();
+                    }
+                    break;
+                case "Bullet":
+                    Kill();// 相打ち
+                    var snowball = collision.gameObject.GetComponent<Snowball>();
+                    snowball.Kill();// 念の為相手のKillも呼ぶ
+                    break;
             }
         }
 
         private void OnTriggerExit2D(Collider2D collision)
         {
-            if(collision.CompareTag("Area"))
+            if (collision.CompareTag("Area"))
             {
                 // 戦場から出た場合、消す
                 Kill();
