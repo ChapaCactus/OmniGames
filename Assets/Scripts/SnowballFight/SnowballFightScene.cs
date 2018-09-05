@@ -25,7 +25,7 @@ namespace CCG.SnowballFight
         }
     }
 
-    public class SnowballFight : MonoBehaviour
+    public class SnowballFightScene : MonoBehaviour
     {
         #region properties
         public List<IPitcher> Player1Pitchers { get; private set; }
