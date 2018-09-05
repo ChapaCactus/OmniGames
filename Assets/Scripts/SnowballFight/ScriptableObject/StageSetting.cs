@@ -12,40 +12,29 @@ namespace CCG.SnowballFight
     public class StageSetting : ScriptableObject
     {
         #region variables
+        // 1P用壁配置設定
         [SerializeField]
-        private List<Vector2> m_player1WallList = new List<Vector2>();
+        private List<Vector2> m_player1WallPositionList = new List<Vector2>();
+        // 2P用壁配置設定
         [SerializeField]
-        private List<Vector2> m_player2WallList = new List<Vector2>();
+        private List<Vector2> m_player2WallPositionList = new List<Vector2>();
         #endregion
 
         #region public methods
-        public List<Vector2> GetPlayer1WallList()
+        /// <summary>
+        /// 指定したPlayer側の雪壁座標リストを返す
+        /// </summary>
+        public List<Vector2> GetPlayerWallPositionList(Enum.Side side)
         {
-            if (m_player1WallList.Count == 0)
-            {
-                return GetDummyWallList(Enum.Side.Player1);
-            }
-            else
-            {
-                return m_player1WallList;
-            }
-        }
-
-        public List<Vector2> GetPlayer2WallList()
-        {
-            if (m_player2WallList.Count == 0)
-            {
-                return GetDummyWallList(Enum.Side.Player2);
-            }
-            else
-            {
-                return m_player2WallList;
-            }
+            return (side == Enum.Side.Player1) ? GetPlayer1WallPositionList() : GetPlayer2WallPositionList();
         }
         #endregion
 
         #region private methods
-        private List<Vector2> GetDummyWallList(Enum.Side side)
+        /// <summary>
+        /// 壁配置リストに要素が設定されていない時など、適当な値を入れて返す
+        /// </summary>
+        private List<Vector2> GetDummyWallPositionList(Enum.Side side)
         {
             var dummy = new List<Vector2>();
             switch(side)
@@ -69,6 +58,38 @@ namespace CCG.SnowballFight
             }
 
             return dummy;
+        }
+
+        /// <summary>
+        /// 1P用壁座標リストを返す
+        /// 設定されて居なければダミーを返す
+        /// </summary>
+        private List<Vector2> GetPlayer1WallPositionList()
+        {
+            if (m_player1WallPositionList.Count == 0)
+            {
+                return GetDummyWallPositionList(Enum.Side.Player1);
+            }
+            else
+            {
+                return m_player1WallPositionList;
+            }
+        }
+
+        /// <summary>
+        /// 2P用壁座標リストを返す
+        /// 設定されて居なければダミーを返す
+        /// </summary>
+        private List<Vector2> GetPlayer2WallPositionList()
+        {
+            if (m_player2WallPositionList.Count == 0)
+            {
+                return GetDummyWallPositionList(Enum.Side.Player2);
+            }
+            else
+            {
+                return m_player2WallPositionList;
+            }
         }
         #endregion
     }
