@@ -95,9 +95,12 @@ namespace CCG.SnowballFight
                     }
                     break;
                 case "Bullet":
-                    Kill();// 相打ち
+                    Kill();
                     var snowball = collision.gameObject.GetComponent<Snowball>();
                     snowball.Kill();// 念の為相手のKillも呼ぶ
+                    break;
+                case "Wall":
+                    Kill();
                     break;
             }
         }
