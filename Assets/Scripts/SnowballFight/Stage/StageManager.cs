@@ -30,31 +30,34 @@ namespace CCG.SnowballFight
             Side1Walls = new List<SnowWall>();
             Side2Walls = new List<SnowWall>();
         }
-        #endregion
 
-        #region private methods
         /// <summary>
         /// 雪壁生成
         /// </summary>
-        private void CreateWalls()
+        public void CreateWalls()
         {
             Side1Walls = new List<SnowWall>();
             StageSetting.GetPlayerWallPositionList(Enum.Side.Player1)
                                      .ForEach(pos =>
                                      {
-                                         var prefab = Resources.Load("Snowball/Prefabs/SnowWall") as SnowWall;
+                                         var prefab = Resources.Load<SnowWall>("Snowball/Prefabs/SnowWall");
                                          var wall = GameObject.Instantiate(prefab, null);
+                                         wall.transform.position = pos;
                                          Side1Walls.Add(wall);
                                      });
             Side2Walls = new List<SnowWall>();
             StageSetting.GetPlayerWallPositionList(Enum.Side.Player2)
                                      .ForEach(pos =>
                                      {
-                                         var prefab = Resources.Load("Snowball/Prefabs/SnowWall") as SnowWall;
+                                         var prefab = Resources.Load<SnowWall>("Snowball/Prefabs/SnowWall");
                                          var wall = GameObject.Instantiate(prefab, null);
+                                         wall.transform.position = pos;
                                          Side2Walls.Add(wall);
                                      });
         }
+        #endregion
+
+        #region private methods
         #endregion
     }
 }

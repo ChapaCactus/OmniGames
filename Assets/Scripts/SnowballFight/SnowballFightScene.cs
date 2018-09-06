@@ -63,6 +63,7 @@ namespace CCG.SnowballFight
 
             var stageSetting = Resources.Load("Snowball/ScriptableObject/Stage1") as StageSetting;
             StageManager = new StageManager(stageSetting);
+            StageManager.CreateWalls();
         }
 
         private void FixedUpdate()
