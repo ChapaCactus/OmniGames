@@ -11,6 +11,11 @@ namespace CCG.SnowballFight
         private const float MOVE_BUFF = 0.2f;
         #endregion
 
+        #region variables
+        [SerializeField]
+        private ParticleSystem m_breakParticlePrefab = null;
+        #endregion
+
         #region properties
         public Enum.DirectionY DirectionY { get; private set; }
         public Vector3 MoveVector { get; private set; } = Vector3.zero;
@@ -116,6 +121,10 @@ namespace CCG.SnowballFight
 
         private void Kill()
         {
+            var particle = Instantiate<ParticleSystem>(m_breakParticlePrefab, null);
+            particle.transform.position = transform.position;
+            particle.Play();
+
             IsPlaying = false;
             SetActive(false);
         }

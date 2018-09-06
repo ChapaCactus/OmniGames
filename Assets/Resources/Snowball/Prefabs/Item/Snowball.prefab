@@ -89,6 +89,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ef827c16fe1e43ff955c356e7251cd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_breakParticlePrefab: {fileID: 198332895559610482, guid: 0ec3ac1050238416db3381d2bb403f1b,
+    type: 2}
 --- !u!212 &212254553602253092
 SpriteRenderer:
   m_ObjectHideFlags: 1
