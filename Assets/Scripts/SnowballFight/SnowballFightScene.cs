@@ -30,6 +30,8 @@ namespace CCG.SnowballFight
         #region properties
         public List<IPitcher> Player1Pitchers { get; private set; }
         public List<IPitcher> Player2Pitchers { get; private set; }
+
+        public StageManager StageManager { get; private set; }
         #endregion
 
         #region unity callbacks
@@ -58,6 +60,9 @@ namespace CCG.SnowballFight
                 new CharacterSetupData("", new Vector2(-1, -3)),
             };
             Setup(setupData);
+
+            var stageSetting = Resources.Load("Snowball/ScriptableObject/Stage1") as StageSetting;
+            StageManager = new StageManager(stageSetting);
         }
 
         private void FixedUpdate()
