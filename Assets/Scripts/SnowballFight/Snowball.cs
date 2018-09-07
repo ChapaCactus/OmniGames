@@ -101,11 +101,13 @@ namespace CCG.SnowballFight
                     break;
                 case "Bullet":
                     Kill();
-                    var snowball = collision.gameObject.GetComponent<Snowball>();
+                    var snowball = collision.GetComponent<Snowball>();
                     snowball.Kill();// 念の為相手のKillも呼ぶ
                     break;
                 case "Wall":
                     Kill();
+                    var wall = collision.GetComponent<SnowWall>();
+                    wall.Break();
                     break;
             }
         }
@@ -121,6 +123,7 @@ namespace CCG.SnowballFight
 
         private void Kill()
         {
+            // 破壊エフェクト再生
             var particle = Instantiate<ParticleSystem>(m_breakParticlePrefab, null);
             particle.transform.position = transform.position;
             particle.Play();
