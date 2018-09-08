@@ -12,6 +12,8 @@ namespace CCG
         #region properties
         // ゲーム初期化済みか
         public static bool IsInitialized { get; private set; } = false;
+
+        public static SceneBase CurrentGameScene { get; set; } = null;
         #endregion
 
         #region public methods
