@@ -61,7 +61,7 @@ namespace CCG.WeaponSmith
             {
                 // スコア加算
                 Score += Weapon.Score;
-                // 武器再生成
+                // 武器再生成 
                 Weapon.Kill();
                 Weapon = CreateWeapon();
             }
