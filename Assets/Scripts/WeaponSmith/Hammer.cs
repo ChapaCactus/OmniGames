@@ -21,10 +21,6 @@ namespace CCG.WeaponSmith
         #endregion
 
         #region private methods
-        private Weapon GetCurrentWeapon()
-        {
-            return ParentScene.Weapon;
-        }
         #endregion
     }
 }
