@@ -13,8 +13,8 @@ namespace CCG.Thwomp
         public enum ActionState
         {
             Wait,
-            Moving,
-            Leaving,
+            MoveDown,
+            MoveUp,
         }
         #endregion
 
@@ -47,7 +47,7 @@ namespace CCG.Thwomp
         private void OnTriggerEnter2D(Collider2D collision)
         {
             var go = collision.gameObject;
-            if (go.CompareTag(TARGET_TAG))
+            if (CurrentActionState != ActionState.MoveUp && go.CompareTag(TARGET_TAG))
             {
                 // NPC削除
                 Destroy(go);
@@ -59,13 +59,13 @@ namespace CCG.Thwomp
         #region public methods
         public void Action()
         {
-            if (CurrentActionState == ActionState.Moving
-                || CurrentActionState == ActionState.Leaving)
+            if (CurrentActionState == ActionState.MoveDown
+                || CurrentActionState == ActionState.MoveUp)
             {
                 return;
             }
 
-            CurrentActionState = ActionState.Moving;
+            CurrentActionState = ActionState.MoveDown;
 
             transform.position = StartPos;
             var moveSeq = DOTween.Sequence();
@@ -75,7 +75,7 @@ namespace CCG.Thwomp
                 .SetEase(Ease.InQuint)
                 .OnComplete(() =>
             {
-                CurrentActionState = ActionState.Leaving;
+                CurrentActionState = ActionState.MoveUp;
             }));
             // 上移動
             moveSeq.Append(
