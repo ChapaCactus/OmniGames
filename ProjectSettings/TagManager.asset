@@ -8,6 +8,7 @@ TagManager:
   - Worker
   - Bullet
   - Wall
+  - NPC
   layers:
   - Default
   - TransparentFX
@@ -44,6 +45,9 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Ground
+    uniqueID: 1288260273
     locked: 0
   - name: Character
     uniqueID: 939774689

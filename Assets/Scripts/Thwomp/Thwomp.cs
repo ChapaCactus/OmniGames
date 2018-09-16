@@ -18,6 +18,10 @@ namespace CCG.Thwomp
         }
         #endregion
 
+        #region constants
+        private const string TARGET_TAG = "NPC";
+        #endregion
+
         #region properties
         public ActionState CurrentActionState { get; private set; }
 
@@ -29,7 +33,7 @@ namespace CCG.Thwomp
         private void Awake()
         {
             StartPos = transform.position;
-            EndPos = transform.position + new Vector3(0, -7, 0);
+            EndPos = transform.position + new Vector3(0f, -7.3f, 0f);
         }
 
         private void Update()
@@ -37,6 +41,17 @@ namespace CCG.Thwomp
             if (Input.GetButtonDown("Jump"))
             {
                 Action();
+            }
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            var go = collision.gameObject;
+            if (go.CompareTag(TARGET_TAG))
+            {
+                // NPC削除
+                Destroy(go);
+                AddReward(-1);
             }
         }
         #endregion
@@ -54,6 +69,7 @@ namespace CCG.Thwomp
 
             transform.position = StartPos;
             var moveSeq = DOTween.Sequence();
+            // 下移動
             moveSeq.Append(
                 transform.DOMove(EndPos, 0.5f)
                 .SetEase(Ease.InQuint)
@@ -61,6 +77,7 @@ namespace CCG.Thwomp
             {
                 CurrentActionState = ActionState.Leaving;
             }));
+            // 上移動
             moveSeq.Append(
                 transform.DOMove(StartPos, 0.5f)
                 .SetDelay(0.5f)
@@ -71,6 +88,12 @@ namespace CCG.Thwomp
             }));
 
             Debug.Log("Action");
+        }
+        #endregion
+
+        #region private methods
+        private void AddReward(int add)
+        {
         }
         #endregion
     }
